@@ -32,12 +32,15 @@ HTTParty: for the third party API requests as it's very well maintained and easy
 
 ### With docker
 
-Just run: `docker compose up`
+Steps:
+
+1. Run: `docker compose up`
+2. Access: `http://localhost:3000` in your browser.
 
 ### Without docker
 
 Steps:
 
-1. `bundle install`
-2. `bin/dev`
+1. Run `bundle install`
+2. Run `bin/dev`
 3. Access `http://localhost:3000` in your browser.
