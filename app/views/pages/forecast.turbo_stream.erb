@@ -1,0 +1,38 @@
+<%= turbo_stream.update "forecast" do %>
+  <% if @forecast.blank? %>
+    <span class="mt-2 block text-sm font-semibold text-gray-900">Address not found.</span>
+  <% else %>
+    <div class="bg-white fade-in">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid grid-cols-1 gap-px bg-gray-900/5 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="bg-white px-4 py-6 sm:px-6 lg:px-8">
+            <p class="text-sm/6 font-medium text-gray-500">Current temperature</p>
+            <p class="mt-2 flex items-baseline gap-x-2 justify-center">
+              <span class="text-4xl font-semibold tracking-tight text-gray-900"><%= @forecast[:current] %>°F</span>
+            </p>
+          </div>
+          <div class="bg-white px-4 py-6 sm:px-6 lg:px-8">
+            <p class="text-sm/6 font-medium text-gray-500">Min</p>
+            <p class="mt-2 flex items-baseline gap-x-2 justify-center">
+              <span class="text-4xl font-semibold tracking-tight text-blue-600"><%= @forecast[:min] %>°F</span>
+            </p>
+          </div>
+          <div class="bg-white px-4 py-6 sm:px-6 lg:px-8">
+            <p class="text-sm/6 font-medium text-gray-500">Max</p>
+            <p class="mt-2 flex items-baseline gap-x-2 justify-center">
+              <span class="text-4xl font-semibold tracking-tight text-red-600"><%= @forecast[:max] %>°F</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-center animate-bounce pt-8">
+      <% if @forecast[:from_cache] %>
+        <span class="inline-flex items-center rounded-md bg-green-100 px-2 py-1 text-xs font-medium text-green-700">From Cache</span>
+      <% else %>
+        <span class="inline-flex items-center rounded-md bg-red-100 px-2 py-1 text-xs font-medium text-red-700">From API</span>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

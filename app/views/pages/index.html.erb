@@ -1,0 +1,37 @@
+<div class="flex flex-col gap-y-10">
+  <div>
+    <%= form_with url: pages_forecast_path, method: :post, class: "border-b border-gray-900/10 pb-6" do |form| %>
+      <div class="space-y-8">
+        <div class=" pb-4">
+          <h2 class="text-base/7 font-semibold text-gray-900">Forecast</h2>
+          <p class="mt-1 text-sm/6 text-gray-600">Provide a zipcode to get the forecast.</p>
+
+          <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div class="col-span-full">
+              <%= form.label :address, class: "block text-sm/6 font-medium text-gray-900" %>
+              <div class="mt-2">
+                <%= form.text_field :address, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+              </div>
+            </div>
+
+            <div class="col-span-full">
+              <%= form.label :zipcode, class: "block text-sm/6 font-medium text-gray-900" %>
+              <div class="mt-2">
+                <%= form.text_field :zipcode, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-start gap-x-6">
+        <%= form.submit "Get forecast", data: { turbo_submits_with: "Contacting the cloud department..." }, class: "cursor-pointer rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        %>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="forecast" class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600">
+    <span class="mt-2 block text-sm font-semibold text-gray-900">Type either address or zipcode above to get the forecast.</span>
+  </div>
+</div>
