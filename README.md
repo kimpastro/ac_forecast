@@ -44,3 +44,7 @@ Steps:
 1. Run `bundle install`
 2. Run `bin/dev`
 3. Access `http://localhost:3000` in your browser.
+
+## NOTE
+
+- I've pushed .env.development.local file on purpose so you don't need to create a Geocode account just to have one.
