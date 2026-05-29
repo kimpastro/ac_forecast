@@ -7,7 +7,7 @@ class GeoService
       "/search",
       query: {
         q: address,
-        api_key: ENV.fetch["GEOCODE_API_TOKEN"]
+        api_key: ENV.fetch("GEOCODE_API_TOKEN")
       }
     )
 
@@ -23,7 +23,7 @@ class GeoService
       query: {
         postalcode: zipcode,
         country: "US",
-        api_key:
+        api_key: ENV.fetch("GEOCODE_API_TOKEN")
       }
     )
 
