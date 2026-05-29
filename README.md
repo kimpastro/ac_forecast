@@ -47,4 +47,4 @@ Steps:
 
 ## NOTE
 
-- I've pushed .env.development.local file on purpose so you don't need to create a Geocode account just to have one.
+- I've pushed `.env.development.local` file on purpose so you don't have to create a Geocode account just to have one.
