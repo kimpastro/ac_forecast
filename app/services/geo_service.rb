@@ -2,7 +2,7 @@ class GeoService
   include HTTParty
   base_uri "https://geocode.maps.co"
 
-  def self.get_zipcode_by_address(address)
+  def self.by_address(address)
     result = get(
       "/search",
       query: {
@@ -11,13 +11,10 @@ class GeoService
       }
     )
 
-    response = result.parsed_response
-    return nil if response.blank?
-
-    response.first["address"]["postcode"]
+    normalize_result(result)
   end
 
-  def self.geo_by_zipcode(zipcode)
+  def self.by_zipcode(zipcode)
     result = get(
       "/search",
       query: {
@@ -27,9 +24,19 @@ class GeoService
       }
     )
 
+    normalize_result(result)
+  end
+
+  private_class_method def self.normalize_result(result)
+    return nil unless result.success?
+
     response = result.parsed_response
     return nil if response.blank?
 
-    response.first.slice("lat", "lon")
+    {
+      zipcode: response.first["address"]["postcode"],
+      lat: response.first["lat"],
+      lon: response.first["lon"]
+    }
   end
 end

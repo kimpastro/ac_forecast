@@ -1,10 +1,10 @@
 <div class="flex flex-col gap-y-10">
   <div>
-    <%= form_with url: pages_forecast_path, method: :post, class: "border-b border-gray-900/10 pb-6" do |form| %>
+    <%= form_with url: forecasts_path, method: :post, class: "border-b border-gray-900/10 pb-6" do |form| %>
       <div class="space-y-8">
         <div class=" pb-4">
           <h2 class="text-base/7 font-semibold text-gray-900">Forecast</h2>
-          <p class="mt-1 text-sm/6 text-gray-600">Provide a zipcode to get the forecast.</p>
+          <p class="mt-1 text-sm/6 text-gray-600">Provide an address or zipcode to get the forecast.</p>
 
           <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div class="col-span-full">

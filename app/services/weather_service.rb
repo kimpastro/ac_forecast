@@ -15,6 +15,7 @@ class WeatherService
     return nil unless result.success?
 
     response = result.parsed_response
+    return nil if response.blank?
 
     {
       current: response["current"]["temperature_2m"],

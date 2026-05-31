@@ -1,6 +1,6 @@
 <%= turbo_stream.update "forecast" do %>
   <% if @forecast.blank? %>
-    <span class="mt-2 block text-sm font-semibold text-gray-900">Address not found.</span>
+    <span class="mt-2 block text-sm font-semibold text-gray-900">Address not found, please check your address or zipcode.</span>
   <% else %>
     <div class="bg-white fade-in">
       <div class="mx-auto max-w-7xl">

@@ -12,7 +12,7 @@ I'm using two third party services:
 
 My understanding: Find the forecast by zipcode and accept an address as input as well. Cache the results by zipcode.
 
-Since we need zipcode for caching it was inevitable to use some "get zipcode by address" API service, so we always gonna have the zipcode either when user provides only the address.
+Since we need zipcode for caching it was inevitable to use some "get zipcode by address" API service when user provides only the address, since we need zipcode to be used as cache key to cache the results.
 
 ## Approach
 
@@ -47,4 +47,5 @@ Steps:
 
 ## NOTE
 
-- I've pushed `.env.development.local` file on purpose so you don't have to create a Geocode account just to have one.
+- I've removed from `.gitignore` and pushed `.env.*.local` files on purpose so you don't have to create a Geocode account just to get an `API KEY`.
+- As it requires no database, the sqlite3 is there as rails default.

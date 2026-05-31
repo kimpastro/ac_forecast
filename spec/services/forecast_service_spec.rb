@@ -21,18 +21,42 @@ RSpec.describe ForecastService do
     subject { described_class.new(address:, zipcode:).forecast }
 
     before do
-      allow(GeoService)
-        .to receive(:get_zipcode_by_address)
-        .with(address)
-        .and_return("10017")
+      geo_mock_response = instance_double(
+        HTTParty::Response,
+        parsed_response: [
+          {
+            "address" => {
+              "postcode" => zipcode
+            },
+            "lat" => "40.7558017",
+            "lon" => "-73.9787414"
+          }
+        ],
+        success?: true
+      )
 
-      allow(GeoService)
-        .to receive(:geo_by_zipcode)
-        .and_return(lat_long)
+      weather_mock_response = instance_double(
+        HTTParty::Response,
+        parsed_response: {
+          "current"  => { "temperature_2m" => 20.4 },
+          "hourly" => {
+            "temperature_2m" => [ 12.9, 10.3, 10.0, 10.4, 12.2 ]
+          }
+        },
+        success?: true,
+      )
+
+      allow(GeoService).to receive(:get)
+        .with("/search", { query: { api_key: ENV.fetch("GEOCODE_API_TOKEN"), country: "US", postalcode: "10017" } })
+        .and_return(geo_mock_response)
+
+      allow(GeoService).to receive(:get)
+        .with("/search", { query: { api_key: ENV.fetch("GEOCODE_API_TOKEN"), q: "1600 Pennsylvania Ave NW, Washington, DC" } })
+        .and_return(geo_mock_response)
 
       allow(WeatherService)
-        .to receive(:by_coordinates)
-        .and_return(forecast)
+        .to receive(:get)
+        .and_return(weather_mock_response)
     end
 
     it "should cache" do
