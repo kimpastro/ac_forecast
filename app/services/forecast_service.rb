@@ -13,7 +13,7 @@ class ForecastService
 
   def forecast
     if Zipcode.valid?(zipcode)
-      cached = read_cache(zipcode)
+      cached = read_cache
       return cached if cached.present?
 
       geo = GeoService.by_zipcode(zipcode)
@@ -22,7 +22,7 @@ class ForecastService
     end
     return nil if geo.blank?
 
-    cached = read_cache(geo[:zipcode])
+    cached = read_cache
     return cached if cached.present?
 
     forecast = WeatherService.by_coordinates(
@@ -31,21 +31,21 @@ class ForecastService
     )
     return nil if forecast.blank?
 
-    write_cache(geo[:zipcode], forecast)
+    write_cache(forecast)
     forecast.merge(from_cache: false)
   end
 
   private
 
-  def read_cache(zipcode)
-    Rails.cache.read(cache_key(zipcode))&.merge(from_cache: true)
+  def read_cache
+    Rails.cache.read(cache_key)&.merge(from_cache: true)
   end
 
-  def write_cache(zipcode, data)
-    Rails.cache.write(cache_key(zipcode), data, expires_in: EXPIRE_TIME)
+  def write_cache(data)
+    Rails.cache.write(cache_key, data, expires_in: EXPIRE_TIME)
   end
 
-  def cache_key(zipcode)
+  def cache_key
     "#{CACHE_NAMESPACE}:#{zipcode}"
   end
 end
